@@ -21,11 +21,9 @@ CMD node --version
 CMD go version
 
 #RUN curl -SL https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-1.5.9-a07539fb.tar.gz | tar -zxv --strip-components=1 -C /usr/local/bin/
-RUN cd ~
-RUN git clone -b 'release/1.6' --single-branch --depth 1 https://github.com/ethereum/go-ethereum.git
-RUN cd go-ethereum
-RUN make geth
-RUN cp build/bin/geth /usr/local/bin/
+RUN git clone -b 'release/1.6' --single-branch --depth 1 https://github.com/ethereum/go-ethereum.git ~/go-ethereum
+RUN cd ~/go-ethereum && make geth
+RUN cp ~/go-ethereum/build/bin/geth /usr/local/bin/
 
 # Genesis
 RUN geth init genesis.json --datadir /data/ethData
