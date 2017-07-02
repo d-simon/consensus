@@ -28,9 +28,12 @@ RUN cp geth-linux-arm7-1.6.6-10a45cb5/geth /usr/local/bin
 COPY . /app
 RUN chmod +x /app/run.sh
 
-# Generate DAG
-RUN mkdir -p ~/.ethash
+# Generate initial DAG
+RUN mkdir -p /data/.ethash
 RUN geth makedag 0 ~/.ethash
+
+# Symlink to data so .ethash persists
+RUN ln -fs /data/.ethash ~/.ethash
 
 # Start mining
 CMD /app/run.sh
