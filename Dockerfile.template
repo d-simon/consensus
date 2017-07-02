@@ -23,13 +23,12 @@ RUN curl -SL https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-1.6.
 COPY . /app
 RUN chmod +x /app/run.sh
 
-# Symlink to /data/.ethash to ~/.ethash so the DAG persists
-RUN mkdir -p /data/.ethash
-RUN ln -fs /data/.ethash ~/.ethash
+# # Symlink to /data/.ethash to ~/.ethash so the DAG persists
+# RUN mkdir -p /data/.ethash
+# RUN ln -fs /data/.ethash ~/.ethash
 
 # Generate initial DAG
 #RUN geth makedag 0 ~/.ethash
-RUN wget https://0xfff.io/dag/full-R23-0000000000000000 && mv full-R23-0000000000000000 ~/.ethash
 
 # Start genesis and mining
 CMD /app/run.sh
