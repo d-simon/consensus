@@ -17,7 +17,7 @@ RUN sudo cp -R node-v6.11.0-linux-armv7l/* /usr/local
 ENV INITSYSTEM on
 
 # Install geth 1.6.6 ARMv7
-RUN wget https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-1.6.6-10a45cb5.tar.gz | tar -zxv --strip-components=1 -C /usr/local/bin/
+RUN curl -SL https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-1.6.6-10a45cb5.tar.gz | tar -zxv --strip-components=1 -C /usr/local/bin/
 
 # Copy repository files and make run.sh executable
 COPY . /app
