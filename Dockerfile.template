@@ -8,6 +8,11 @@ FROM resin/%%RESIN_MACHINE_NAME%%-golang
 RUN apt-get update && apt-get install -yq \
     curl
 
+RUN wget https://nodejs.org/dist/v6.11.0/node-v6.11.0-linux-armv7l.tar.xz
+RUN tar -xvf  node-v6.11.0-linux-armv7l.tar.xz
+RUN cd node-v6.11.0-linux-armv7l
+RUN sudo cp -R * /usr/local
+
 # Enable systemd init system in container
 ENV INITSYSTEM on
 
