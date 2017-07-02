@@ -29,7 +29,8 @@ COPY . /app
 RUN chmod +x /app/run.sh
 
 # Generate DAG
-RUN geth makedag 0 ~/.ethash/
+RUN mkdir -p ~/.ethash
+RUN geth makedag 0 ~/.ethash
 
 # Start mining
 CMD /app/run.sh
