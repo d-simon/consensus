@@ -16,6 +16,7 @@ RUN sudo cp -R node-v6.11.0-linux-armv7l/* /usr/local
 # Enable systemd init system in container
 ENV INITSYSTEM on
 
+COPY . /app
 
 #RUN curl -SL https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-1.5.9-a07539fb.tar.gz | tar -zxv --strip-components=1 -C /usr/local/bin/
 # RUN git clone -b 'release/1.6' --single-branch --depth 1 https://github.com/ethereum/go-ethereum.git ~/go-ethereum
@@ -35,7 +36,8 @@ RUN geth init genesis.json --datadir /data/ethData
 RUN echo "ethpasswd" > /data/ethpassword && geth --datadir /data/ethData --password /data/ethpassword account new
 
 # Run and start mining
-RUN geth --networkid="115101110115" --rpc --datadir /data/ethData --mine
+CMD geth --networkid="115101110115" --rpc --datadir /data/ethData --mine
+
 
 
 # Geth commmand to sync blockchain.  Highly advised that you copy from another machine.
