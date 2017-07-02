@@ -16,8 +16,6 @@ RUN sudo cp -R node-v6.11.0-linux-armv7l/* /usr/local
 # Enable systemd init system in container
 ENV INITSYSTEM on
 
-COPY . /app
-
 #RUN curl -SL https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-1.5.9-a07539fb.tar.gz | tar -zxv --strip-components=1 -C /usr/local/bin/
 # RUN git clone -b 'release/1.6' --single-branch --depth 1 https://github.com/ethereum/go-ethereum.git ~/go-ethereum
 # RUN cd ~/go-ethereum && make geth
@@ -27,7 +25,8 @@ RUN wget https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-1.6.6-10
 RUN tar -xvf geth-linux-arm7-1.6.6-10a45cb5.tar.gz
 RUN cp geth-linux-arm7-1.6.6-10a45cb5/geth /usr/local/bin
 
-
+COPY . /app
+RUN chmod +x /app/run.sh
 CMD /app/run.sh
 
 
