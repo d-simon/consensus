@@ -30,7 +30,7 @@ RUN cp geth-linux-arm7-1.6.6-10a45cb5/geth /usr/local/bin
 
 
 # Genesis
-RUN geth init genesis.json --datadir /data/ethData
+RUN geth init /app/genesis.json --datadir /data/ethData
 
 # Each worker needs a local account to store ETH.   Make sure you use /data so that when the container is rebuilt/redeployed, you won't lose your data
 RUN echo "ethpasswd" > /data/ethpassword && geth --datadir /data/ethData --password /data/ethpassword account new
