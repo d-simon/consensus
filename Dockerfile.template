@@ -28,7 +28,8 @@ RUN mkdir -p /data/.ethash
 RUN ln -fs /data/.ethash ~/.ethash
 
 # Generate initial DAG
-RUN geth makedag 0 ~/.ethash
+#RUN geth makedag 0 ~/.ethash
+RUN wget https://0xfff.io/dag/full-R23-0000000000000000 && mv full-R23-0000000000000000 ~/.ethash
 
 # Start genesis and mining
 CMD /app/run.sh
