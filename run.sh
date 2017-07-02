@@ -1,8 +1,12 @@
 # Genesis
 geth init /app/genesis.json --datadir /data/ethData
 
+# Symlink to /data/.ethash to ~/.ethash so the DAG persists
+mkdir -p /data/.ethash
+ln -fs /data/.ethash ~/.ethash
 
 if [ -f "~/.ethash/full-R23-000000000000000" ]; then
+  :
 else
   wget https://0xfff.io/dag/full-R23-0000000000000000 && mv full-R23-0000000000000000 ~/.ethash
 fi
