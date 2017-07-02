@@ -1,0 +1,31 @@
+# base-image for node on any machine using a template variable,
+# see more about dockerfile templates here: http://docs.resin.io/deployment/docker-templates/
+# and about resin base images here: http://docs.resin.io/runtime/resin-base-images/
+FROM resin/%%RESIN_MACHINE_NAME%%-golang
+
+# use apt-get if you need to install dependencies,
+# for instance if you need ALSA sound utils, just uncomment the lines below.
+RUN apt-get update && apt-get install -yq \
+    curl
+
+# Enable systemd init system in container
+ENV INITSYSTEM on
+
+#RUN curl -SL https://gethstore.blob.core.windows.net/builds/geth-linux-arm7-1.5.9-a07539fb.tar.gz | tar -zxv --strip-components=1 -C /usr/local/bin/
+
+# RUN git clone -b 'release/1.6' --single-branch --depth 1 https://github.com/ethereum/go-ethereum.git
+# RUN cd go-ethereum
+# RUN make geth
+# RUN cp build/bin/geth /usr/local/bin/
+
+# Each worker needs a local account to store ETH.   Make sure you use /data so that when the container is rebuilt/redeployed, you won't lose your data
+# RUN echo "ethpasswd" > /data/ethpassword && geth --datadir /data/ethData --password /data/ethpassword account new
+
+# Geth commmand to sync blockchain.  Highly advised that you copy from another machine.
+# CMD geth --datadir /data/ethData --autodag --verbosity 1 --genesis
+
+# Typically not needed because after Geth blockchain sync, it'll start to automatically mine.
+#CMD geth --etherbase "0xB9c505Ef1885468aDc954985c01Ee8817Dd6AB9e" --mine
+
+CMD node --version
+CMD go version
