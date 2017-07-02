@@ -28,16 +28,7 @@ RUN tar -xvf geth-linux-arm7-1.6.6-10a45cb5.tar.gz
 RUN cp geth-linux-arm7-1.6.6-10a45cb5/geth /usr/local/bin
 
 
-
-# Genesis
-CMD geth init /app/genesis.json --datadir /data/ethData
-
-# Each worker needs a local account to store ETH.   Make sure you use /data so that when the container is rebuilt/redeployed, you won't lose your data
-CMD echo "ethpasswd" > /data/ethpassword && geth --datadir /data/ethData --password /data/ethpassword account new
-
-# Run and start mining
-CMD geth --networkid="115101110115" --rpc --datadir /data/ethData --mine
-
+CMD /app/run.sh
 
 
 # Geth commmand to sync blockchain.  Highly advised that you copy from another machine.
